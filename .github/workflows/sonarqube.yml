@@ -36,8 +36,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=vulnerable-app-sast-demo
-            -Dsonar.organization=your-organization-key
+            -Dsonar.projectKey=anjar_wilujeng_vulnerable-app
+            -Dsonar.organization=anjar-wilujeng
             -Dsonar.python.version=3.11
 
       - name: Check Quality Gate

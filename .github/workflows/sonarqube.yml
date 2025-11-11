@@ -43,5 +43,4 @@ jobs:
       - name: Check Quality Gate
         run: |
           echo "Quality Gate status will be shown in SonarQube dashboard"
-          echo "Visit: https://sonarcloud.io/dashboard?id=vulnerable-app-sast-demo"
-
+          echo "Visit: https://sonarcloud.io/dashboard?id=vulnerable-app"

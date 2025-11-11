@@ -1,4 +1,4 @@
-name: SonarCloud Analysis
+name: SonarQube SAST Analysis
 
 on:
   push:
@@ -9,15 +9,15 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  build:
-    name: SonarCloud Scan
+  sonarqube:
+    name: SonarQube Scan
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # disarankan untuk analisis penuh
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,14 +29,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v3
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # otomatis tersedia di repo
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # harus kamu tambahkan di secrets
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=anjar-wilujeng
-            -Dsonar.projectKey=vulnerable-app
+            -Dsonar.projectKey=vulnerable-app-sast-demo
+            -Dsonar.organization=your-organization-key
             -Dsonar.python.version=3.11
+
+      - name: Check Quality Gate
+        run: |
+          echo "Quality Gate status will be shown in SonarQube dashboard"
+          echo "Visit: https://sonarcloud.io/dashboard?id=vulnerable-app-sast-demo"
 

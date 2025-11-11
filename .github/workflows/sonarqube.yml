@@ -36,7 +36,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=vulnerable-app
+            -Dsonar.projectKey=anjar-wilujeng_vulnerable-app
             -Dsonar.organization=anjar-wilujeng
             -Dsonar.python.version=3.11
 
